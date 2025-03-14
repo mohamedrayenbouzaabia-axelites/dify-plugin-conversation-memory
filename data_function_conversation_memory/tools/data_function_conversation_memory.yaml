@@ -1,0 +1,30 @@
+identity:
+  name: data_function_conversation_memory
+  author: alterxyz
+  label:
+    en_US: data_function_conversation_memory
+    zh_Hans: data_function_conversation_memory
+    pt_BR: data_function_conversation_memory
+description:
+  human:
+    en_US: store and access conversations
+    zh_Hans: store and access conversations
+    pt_BR: store and access conversations
+  llm: store and access conversations
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Query string
+      zh_Hans: 查询语句
+      pt_BR: Query string
+    human_description:
+      en_US: store and access conversations
+      zh_Hans: store and access conversations
+      pt_BR: store and access conversations
+    llm_description: store and access conversations
+    form: llm
+extra:
+  python:
+    source: tools/data_function_conversation_memory.py

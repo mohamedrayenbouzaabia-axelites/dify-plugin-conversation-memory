@@ -1,0 +1,17 @@
+identity:
+  author: alterxyz
+  name: data_function_conversation_memory
+  label:
+    en_US: data_function_conversation_memory
+    zh_Hans: data_function_conversation_memory
+    pt_BR: data_function_conversation_memory
+  description:
+    en_US: store and access conversations
+    zh_Hans: store and access conversations
+    pt_BR: store and access conversations
+  icon: icon.svg
+tools:
+  - tools/data_function_conversation_memory.yaml
+extra:
+  python:
+    source: provider/data_function_conversation_memory.py
