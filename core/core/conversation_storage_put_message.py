@@ -2,10 +2,19 @@ from typing import Optional, Dict, Any
 import uuid
 import json
 from datetime import datetime
-from connector import d1_executor
+from connector import cloudflare_d1_query
 from .conversation_storage_dataclasses import Message, Conversation
 
-def conversation_storage_put_message(conversation_id: str, role: str, text: str, parent_message_id: Optional[str] = None, metadata: Optional[Dict[str, Any]] = None) -> Dict[str, str]:
+
+def conversation_storage_put_message(
+    db_brand: str,
+    db_metadata: Dict[str, Any],
+    conversation_id: str,
+    role: str,
+    text: str,
+    parent_message_id: Optional[str] = None,
+    metadata: Optional[Dict[str, Any]] = None,
+) -> Dict[str, str]:
     """
     Add a new message to a specific conversation.
     If the conversation doesn't exist, create it first.
@@ -22,9 +31,24 @@ def conversation_storage_put_message(conversation_id: str, role: str, text: str,
     """
     # Check if conversation exists
     sql_check = "SELECT conversation_id FROM Conversation WHERE conversation_id = ?;"
-    check_result = d1_executor(sql_check, f'["{conversation_id}"]')
-    check_data = check_result.get('metadata', {}).get('result', [{}])[0].get('results', [])
-    
+    if db_brand == "cloudflare_d1_lite":
+        account_id = db_metadata.get("account_id")
+        database_id = db_metadata.get("database_id")
+        api_token = db_metadata.get("api_token")
+        check_result = cloudflare_d1_query(
+            account_id=account_id,
+            database_id=database_id,
+            api_token=api_token,
+            sql_query=sql_check,
+            params=f'["{conversation_id}"]',
+        )
+    else:
+        raise ValueError("Unsupported database brand")
+    # check_result = d1_executor(sql_check, f'["{conversation_id}"]')
+    check_data = (
+        check_result.get("metadata", {}).get("result", [{}])[0].get("results", [])
+    )
+
     # If conversation doesn't exist, create it
     if not check_data:
         conversation = Conversation(conversation_id=conversation_id)
@@ -33,8 +57,14 @@ def conversation_storage_put_message(conversation_id: str, role: str, text: str,
         VALUES (?, ?, ?, ?);
         """
         conv_values = f'["{conversation.conversation_id}", "{conversation.sequence}", "{conversation.status}", "{conversation.created_at.isoformat()}"]'
-        d1_executor(sql_create_conv, conv_values)
-    
+        cloudflare_d1_query(
+            account_id=account_id,
+            database_id=database_id,
+            api_token=api_token,
+            sql_query=sql_create_conv,
+            params=conv_values,
+        )
+
     # Now create the message
     message_id = str(uuid.uuid4())
     timestamp = datetime.now()
@@ -53,7 +83,13 @@ def conversation_storage_put_message(conversation_id: str, role: str, text: str,
     VALUES (?, ?, ?, ?, ?, ?, ?);
     """
     message_values = f'["{message.message_id}", "{message.conversation_id}", "{message.role}", "{message.text}", {json.dumps(message.parent_message_id)}, "{message.timestamp.isoformat()}", {json.dumps(json.dumps(message.metadata) if message.metadata else None)}]'
-    d1_executor(sql_message, message_values)
+    cloudflare_d1_query(
+        account_id=account_id,
+        database_id=database_id,
+        api_token=api_token,
+        sql_query=sql_message,
+        params=message_values,
+    )
 
     sql_conversation = """
     UPDATE Conversation
@@ -61,22 +97,26 @@ def conversation_storage_put_message(conversation_id: str, role: str, text: str,
     WHERE conversation_id = ?;
     """
     conversation_values = f'["{message.message_id}", "{message.conversation_id}"]'
-    d1_executor(sql_conversation, conversation_values)
+    cloudflare_d1_query(
+        account_id=account_id,
+        database_id=database_id,
+        api_token=api_token,
+        sql_query=sql_conversation,
+        params=conversation_values,
+    )
 
-    return {
-        "message_id" : message_id,
-        "conversation_id" : conversation_id
-    }
+    return {"message_id": message_id, "conversation_id": conversation_id}
+
 
 if __name__ == "__main__":
     # Example usage
-    conversation_id_example = "test-conversation-1" # Replace with your conversation_id
+    conversation_id_example = "test-conversation-1"  # Replace with your conversation_id
     # Assume the conversation exists
     message_id = conversation_storage_put_message(
         conversation_id=conversation_id_example,
         role="user",
         text="Hello!",
-        metadata={"source": "web"}
+        metadata={"source": "web"},
     )
     print(f"Message added with ID: {message_id}")
 
@@ -85,6 +125,6 @@ if __name__ == "__main__":
         role="assistant",
         text="Hello! How can I help you?",
         parent_message_id=message_id,
-        metadata={"model": "v1.0"}
+        metadata={"model": "v1.0"},
     )
     print(f"Reply message added with ID: {message_id_reply}")

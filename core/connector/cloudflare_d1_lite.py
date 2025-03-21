@@ -3,6 +3,7 @@ from typing import Dict, Any, List, Optional
 import json
 import os
 
+
 def d1_executor(sql_query: str, params: Optional[str] = None) -> Dict[str, Any]:
     """
     Execute a SQL query on the Cloudflare D1 database using environment variables.
@@ -28,10 +29,11 @@ def d1_executor(sql_query: str, params: Optional[str] = None) -> Dict[str, Any]:
     account_id = os.getenv("CF_ACCOUNT_ID")
     database_id = os.getenv("CF_DATABASE")
     api_token = os.getenv("CF_API_TOKEN")
-    
+
     result = cloudflare_d1_query(account_id, database_id, api_token, sql_query, params)
     # print(f"\n========================================{result}\n========================================")
     return result
+
 
 def cloudflare_d1_query(
     account_id: str,
