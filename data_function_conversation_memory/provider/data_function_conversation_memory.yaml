@@ -12,6 +12,9 @@ identity:
   icon: icon.svg
 tools:
   - tools/data_function_conversation_memory.yaml
+  - tools/init.yaml
+  - tools/get_conversation.yaml
+  - tools/put_message.yaml
 extra:
   python:
     source: provider/data_function_conversation_memory.py

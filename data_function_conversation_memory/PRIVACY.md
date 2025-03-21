@@ -1,3 +1,3 @@
 ## Privacy
 
-!!! Please fill in the privacy policy of the plugin.
+Feel free to use my code. Look at the requirements.txt, so clean!

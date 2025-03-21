@@ -124,3 +124,5 @@ dmypy.json
 
 # Jupyter
 .ipynb_checkpoints
+
+data_function_conversation_memory.difypkg

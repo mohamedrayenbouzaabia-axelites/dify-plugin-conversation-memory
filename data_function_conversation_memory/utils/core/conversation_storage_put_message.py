@@ -2,7 +2,7 @@ from typing import Optional, Dict, Any
 import uuid
 import json
 from datetime import datetime
-from connector import cloudflare_d1_query
+from utils.connector import cloudflare_d1_query
 from .conversation_storage_dataclasses import Message, Conversation
 
 
@@ -27,7 +27,7 @@ def conversation_storage_put_message(
         metadata: Optional metadata dictionary
 
     Returns:
-        Newly created message ID
+        {"message_id": message_id, "conversation_id": conversation_id}
     """
     # Check if conversation exists
     sql_check = "SELECT conversation_id FROM Conversation WHERE conversation_id = ?;"
@@ -106,25 +106,3 @@ def conversation_storage_put_message(
     )
 
     return {"message_id": message_id, "conversation_id": conversation_id}
-
-
-if __name__ == "__main__":
-    # Example usage
-    conversation_id_example = "test-conversation-1"  # Replace with your conversation_id
-    # Assume the conversation exists
-    message_id = conversation_storage_put_message(
-        conversation_id=conversation_id_example,
-        role="user",
-        text="Hello!",
-        metadata={"source": "web"},
-    )
-    print(f"Message added with ID: {message_id}")
-
-    message_id_reply = conversation_storage_put_message(
-        conversation_id=conversation_id_example,
-        role="assistant",
-        text="Hello! How can I help you?",
-        parent_message_id=message_id,
-        metadata={"model": "v1.0"},
-    )
-    print(f"Reply message added with ID: {message_id_reply}")

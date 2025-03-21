@@ -31,8 +31,7 @@ def conversation_storage_get_conv_xml_basic(
     )
 
     if not conversation or not hasattr(conversation, "messages"):
-        return "<error>Conversation not found or has no messages</error>"
-
+        return "<error>Conversation not found or this is the first message</error>"
     result = []
     for msg in conversation.messages:
         message_xml = f"""<message>

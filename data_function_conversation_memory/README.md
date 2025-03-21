@@ -1,10 +1,15 @@
-## data_function_conversation_memory
+## Conversation Memory
 
-**Author:** alterxyz
-**Version:** 0.0.1
-**Type:** tool
+Brings memory to any nodes.
 
-### Description
+You will need a Cloudflare account to use this function.
 
+![DEMO](_assets/screenshot1.png)
 
+## Roadmap
 
+- [x] Add memory to any node
+- [ ] Allow retry and edit feature
+- [ ] Deeper integration to Dify
+- [ ] Allow other storage options
+- [ ] "Project" - long term memory for agentic AI

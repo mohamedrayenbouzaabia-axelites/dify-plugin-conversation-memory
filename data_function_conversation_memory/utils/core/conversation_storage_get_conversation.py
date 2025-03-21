@@ -1,6 +1,6 @@
 from typing import Optional, List, Dict, Any
 import json
-from connector import cloudflare_d1_query
+from utils.connector import cloudflare_d1_query
 from .conversation_storage_dataclasses import Conversation, Message
 from datetime import datetime
 
@@ -150,39 +150,3 @@ def conversation_storage_get_conversation(
         conversation.messages = []
 
     return conversation
-
-
-if __name__ == "__main__":
-    conversation_id_to_get = "test-conversation-1"  # 替换为你要获取的 conversation_id
-
-    # 假设 conversation_id_to_get 的对话已经存在消息
-
-    db_brand = "cloudflare_d1_lite"
-    db_metadata = {
-        "account_id": "your_account_id",
-        "database_id": "your_database_id",
-        "api_token": "your_api_token",
-    }
-
-    conversation_history = conversation_storage_get_conversation(
-        db_brand=db_brand,
-        db_metadata=db_metadata,
-        conversation_id=conversation_id_to_get,
-        max_round=5,
-    )
-
-    if conversation_history:
-        print(
-            f"Conversation ID: {conversation_history.conversation_id}, Sequence: {conversation_history.sequence}"
-        )
-        # Check if messages attribute exists and is not empty
-        if hasattr(conversation_history, "messages") and conversation_history.messages:
-            print("Messages:")
-            for message in conversation_history.messages:
-                print(
-                    f"  - Role: {message.role}, Text: {message.text}, Timestamp: {message.timestamp}, Parent: {message.parent_message_id}"
-                )
-        else:
-            print("No messages found for this conversation.")
-    else:
-        print(f"Conversation with ID '{conversation_id_to_get}' not found.")

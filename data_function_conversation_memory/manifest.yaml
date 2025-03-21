@@ -3,15 +3,15 @@ type: plugin
 author: alterxyz
 name: data_function_conversation_memory
 label:
-  en_US: data_function_conversation_memory
-  ja_JP: data_function_conversation_memory
-  zh_Hans: data_function_conversation_memory
-  pt_BR: data_function_conversation_memory
+  en_US: Conversational Memory
+  ja_JP: 会話メモリ
+  zh_Hans: 会话记忆
+  pt_BR: Memória Conversacional
 description:
   en_US: store and access conversations
-  ja_JP: store and access conversations
-  zh_Hans: store and access conversations
-  pt_BR: store and access conversations
+  ja_JP: 会話を保存してアクセスする
+  zh_Hans: 存储和访问会话
+  pt_BR: armazenar e acessar conversas
 icon: icon.svg
 resource:
   memory: 268435456
