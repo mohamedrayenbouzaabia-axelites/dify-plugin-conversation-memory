@@ -2,9 +2,9 @@ identity:
   name: put_message
   author: alterxyz
   label:
-    en_US: Put Message into Memory Base
-    zh_Hans: 存储消息到记忆库
-    pt_BR: Armazenar Mensagem na Memória Base
+    en_US: Store Message
+    zh_Hans: 存储消息
+    pt_BR: Armazenar Mensagem
 description:
   human:
     en_US: Store a message with specific role into the conversation memory database

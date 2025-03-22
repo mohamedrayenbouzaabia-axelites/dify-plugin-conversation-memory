@@ -2,9 +2,9 @@ identity:
   name: get_conversation
   author: alterxyz
   label:
-    en_US: Get Conversation from Memory Base
-    zh_Hans: 从记忆库中获取对话
-    pt_BR: Obter Conversa da Base de Memória
+    en_US: Load Conversation
+    zh_Hans: 加载对话
+    pt_BR: Carregar Conversa
 description:
   human:
     en_US: Retrieve conversation history from the conversation memory database in XML format

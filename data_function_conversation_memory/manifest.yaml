@@ -1,4 +1,4 @@
-version: 0.0.1
+version: 0.0.2
 type: plugin
 author: alterxyz
 name: data_function_conversation_memory
@@ -12,7 +12,7 @@ description:
   ja_JP: 会話を保存してアクセスする
   zh_Hans: 存储和访问会话
   pt_BR: armazenar e acessar conversas
-icon: icon.svg
+icon: book-solid.svg
 resource:
   memory: 268435456
   permission:
