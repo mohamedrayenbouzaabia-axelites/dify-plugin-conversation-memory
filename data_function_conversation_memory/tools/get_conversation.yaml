@@ -69,11 +69,11 @@ parameters:
       en_US: Maximum Message Rounds
       zh_Hans: 最大消息轮数
     human_description:
-      en_US: Maximum number of message rounds to return (default 10)
-      zh_Hans: 返回的最大消息轮数（默认为 10）
-    llm_description: Maximum number of message rounds to return. Default is 10 if not specified.
+      en_US: Maximum number of message rounds to return (default 50)
+      zh_Hans: 返回的最大消息轮数（默认为 50）
+    llm_description: Maximum number of message rounds to return. Default is 50 if not specified.
     form: llm
-    default: 10
+    default: 50
   - name: user_input
     type: string
     required: false
@@ -85,6 +85,27 @@ parameters:
       zh_Hans: 可选的用户输入，将添加到对话末尾
     llm_description: Optional user input text to append to the end of the conversation as a new message
     form: llm
+  - name: format
+    type: select
+    required: true
+    label:
+      en_US: Output Format
+      zh_Hans: 输出格式
+    human_description:
+      en_US: Choose the format of conversation output (XML or JSON)
+      zh_Hans: 选择对话输出格式（XML或JSON）
+    llm_description: The format of conversation output, can be 'xml' or 'json'
+    form: form
+    options:
+      - value: xml
+        label:
+          en_US: XML Format
+          zh_Hans: XML格式
+      - value: json
+        label:
+          en_US: JSON Format
+          zh_Hans: JSON格式
+    default: xml
 extra:
   python:
     source: tools/get_conversation.py
