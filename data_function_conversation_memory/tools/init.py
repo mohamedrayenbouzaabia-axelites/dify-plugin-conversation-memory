@@ -1,7 +1,7 @@
 from collections.abc import Generator
 from typing import Any
 
-from utils.core import conversation_storage_init_create_tables
+from utils.core import initialize_database
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
@@ -14,5 +14,5 @@ class InitTool(Tool):
             "database_id": tool_parameters["cloudflare_d1_database_id"],
             "api_token": tool_parameters["cloudflare_api_token"],
         }
-        init_result = conversation_storage_init_create_tables(db_brand, db_metadata)
+        init_result = initialize_database(db_brand, db_metadata)
         yield self.create_json_message(init_result)
