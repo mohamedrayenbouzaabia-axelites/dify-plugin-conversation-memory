@@ -52,7 +52,7 @@ class GetConversationTool(Tool):
                 messages.append({"role": "user", "content": user_input})
             
             # 返回字符串格式的JSON
-            yield self.create_text_message(json.dumps(messages, ensure_ascii=False, indent=2))
+            yield self.create_text_message(json.dumps(messages, ensure_ascii=False))
             # 返回原生JSON格式
             yield self.create_json_message({"conversation": messages})
             
