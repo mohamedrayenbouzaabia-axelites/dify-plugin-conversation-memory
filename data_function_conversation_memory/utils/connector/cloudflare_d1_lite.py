@@ -74,10 +74,11 @@ def cloudflare_d1_query(
         return {"error": "invalid_parameter", "metadata": "sql_query cannot be empty"}
 
     query_params: List[Any] = []
-
+    print("params:",params)
     if params:
         try:
             query_params = json.loads(params)
+            print("query_params:",query_params)
             if not isinstance(query_params, list):
                 return {
                     "error": "invalid_parameter",
@@ -95,7 +96,6 @@ def cloudflare_d1_query(
         "Authorization": f"Bearer {api_token}",
     }
     data = {"sql": sql_query, "params": query_params}
-
     try:
         response = httpx.post(url, headers=headers, json=data)
         response.raise_for_status()

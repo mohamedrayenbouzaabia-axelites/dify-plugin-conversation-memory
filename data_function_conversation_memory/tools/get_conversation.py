@@ -38,6 +38,7 @@ class GetConversationTool(Tool):
     <content>{user_input}</content>
 </message></latest>"""
                 content = f"{content}\n{user_message_xml}"
+            # print(content)
             yield self.create_text_message(content)
             
         elif output_format == "json":

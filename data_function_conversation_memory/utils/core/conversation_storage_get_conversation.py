@@ -89,6 +89,7 @@ def conversation_storage_get_conversation(
             params=f'["{conversation_id}", {max_round}]',
         )
 
+        print(messages_result)
         # Extract messages from D1 response
         if messages_result.get("success"):
             message_rows = (
@@ -96,7 +97,6 @@ def conversation_storage_get_conversation(
                 .get("result", [{}])[0]
                 .get("results", [])
             )
-
             for row in message_rows:
                 message = Message(
                     message_id=row["message_id"],

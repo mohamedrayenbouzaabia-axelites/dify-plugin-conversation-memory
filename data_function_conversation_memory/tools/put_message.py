@@ -6,6 +6,7 @@ from utils.core import conversation_storage_put_message
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
+import json
 
 class PutMessageTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
@@ -17,7 +18,7 @@ class PutMessageTool(Tool):
         }
         role = tool_parameters["role"]
         text = tool_parameters["text"]
-
+        # print(text+"\"rayendev")
         put_msg = conversation_storage_put_message(
             db_brand=db_brand,
             db_metadata=db_metadata,

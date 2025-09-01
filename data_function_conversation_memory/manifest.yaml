@@ -3,7 +3,7 @@ type: plugin
 author: alterxyz
 name: data_function_conversation_memory
 label:
-  en_US: Conversational Memory
+  en_US: Conversational Memory Rayen
   ja_JP: 会話メモリ
   zh_Hans: 会话记忆
   pt_BR: Memória Conversacional

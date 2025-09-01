@@ -82,7 +82,9 @@ def conversation_storage_put_message(
     INSERT INTO Message (message_id, conversation_id, role, text, parent_message_id, timestamp, metadata)
     VALUES (?, ?, ?, ?, ?, ?, ?);
     """
-    message_values = f'["{message.message_id}", "{message.conversation_id}", "{message.role}", "{message.text}", {json.dumps(message.parent_message_id)}, "{message.timestamp.isoformat()}", {json.dumps(json.dumps(message.metadata) if message.metadata else None)}]'
+    message_values = f'["{message.message_id}", "{message.conversation_id}", "{message.role}", {json.dumps(message.text)}, {json.dumps(message.parent_message_id)}, "{message.timestamp.isoformat()}", {json.dumps(json.dumps(message.metadata) if message.metadata else None)}]'
+    # message_values = json.dumps([json.dumps(message.message_id), json.dumps(message.conversation_id), json.dumps(message.role), json.dumps(message.text), json.dumps(message.parent_message_id), json.dumps(message.timestamp.isoformat()), json.dumps(json.dumps(message.metadata) if message.metadata else None)])
+    print("message_values:",message_values)
     cloudflare_d1_query(
         account_id=account_id,
         database_id=database_id,
