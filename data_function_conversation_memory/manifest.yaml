@@ -1,9 +1,9 @@
 version: 0.0.4
 type: plugin
-author: alterxyz
+author: rayenbouzaabia
 name: data_function_conversation_memory
 label:
-  en_US: Conversational Memory Rayen
+  en_US: Conversational Memory Axelites
   ja_JP: 会話メモリ
   zh_Hans: 会话记忆
   pt_BR: Memória Conversacional
