@@ -14,9 +14,9 @@ class GetConversationTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         db_brand = "cloudflare_d1_lite"
         db_metadata = {
-            "account_id": tool_parameters["cloudflare_account_id"],
-            "database_id": tool_parameters["cloudflare_d1_database_id"],
-            "api_token": tool_parameters["cloudflare_api_token"],
+            "account_id": self.runtime.credentials["cloudflare_account_id"],
+            "database_id": self.runtime.credentials["cloudflare_d1_database_id"],
+            "api_token": self.runtime.credentials["cloudflare_api_token"],
         }
         conversation_id = tool_parameters["conversation_id"]
         max_round = tool_parameters.get("max_round", 50)
