@@ -78,7 +78,6 @@ def cloudflare_d1_query(
     if params:
         try:
             query_params = json.loads(params)
-            print("query_params:",query_params)
             if not isinstance(query_params, list):
                 return {
                     "error": "invalid_parameter",

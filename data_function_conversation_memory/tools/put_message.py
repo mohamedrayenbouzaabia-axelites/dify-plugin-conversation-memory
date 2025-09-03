@@ -18,7 +18,6 @@ class PutMessageTool(Tool):
         }
         role = tool_parameters["role"]
         text = tool_parameters["text"]
-        # print(text+"\"rayendev")
         put_msg = conversation_storage_put_message(
             db_brand=db_brand,
             db_metadata=db_metadata,
