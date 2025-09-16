@@ -89,8 +89,6 @@ def conversation_storage_get_conversation(
             params=f'["{conversation_id}", {max_round}]',
         )
 
-        print(messages_result)
-        # Extract messages from D1 response
         if messages_result.get("success"):
             message_rows = (
                 messages_result.get("metadata", {})
