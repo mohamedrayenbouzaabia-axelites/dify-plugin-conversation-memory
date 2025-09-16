@@ -7,6 +7,7 @@ from .conversation_storage_init_create_tables import (
 from .conversation_storage_put_message import conversation_storage_put_message
 from .conversation_storage_get_conv_xml_basic import conversation_storage_get_conv_xml_basic
 from .conversation_storage_get_conv_json_basic import conversation_storage_get_conv_json_basic
+from .conversation_storage_put_tag import conversation_storage_put_tag
 
 __all__ = [
     "conversation_storage_init_create_tables",
@@ -16,4 +17,5 @@ __all__ = [
     "conversation_storage_get_conv_xml_basic",
     "conversation_storage_get_conv_json_basic",
     "conversation_storage_put_message",
+    "conversation_storage_put_tag",
 ]

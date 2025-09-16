@@ -2,7 +2,7 @@ identity:
   author: alterxyz
   name: data_function_conversation_memory
   label:
-    en_US: Conversational Memory Axelites
+    en_US: Conversational Memory Test
     zh_Hans: 会话记忆
     pt_BR: Memória Conversacional
     ja_JP: 会話メモリ
@@ -12,10 +12,34 @@ identity:
     pt_BR: armazenar e acessar conversas
     ja_JP: 会話を保存してアクセスする
   icon: book-solid.svg
+credentials_for_provider:
+  cloudflare_account_id:
+    label:
+      en_US: Cloudflare Account ID
+    placeholder:
+      en_US: Enter your Cloudflare Account ID
+    required: true
+    type: text-input
+
+  cloudflare_d1_database_id:
+    label:
+      en_US: Cloudflare D1 Database ID
+    placeholder:
+      en_US: Enter your Cloudflare D1 Database ID
+    required: true
+    type: text-input
+
+  cloudflare_api_token:
+    label:
+      en_US: Cloudflare API Token
+    placeholder:
+      en_US: Paste your Cloudflare API Token
+    required: true
+    type: secret-input
 tools:
-  - tools/init.yaml
   - tools/get_conversation.yaml
   - tools/put_message.yaml
+  - tools/put_conversation_tag.yaml
 extra:
   python:
     source: provider/data_function_conversation_memory.py

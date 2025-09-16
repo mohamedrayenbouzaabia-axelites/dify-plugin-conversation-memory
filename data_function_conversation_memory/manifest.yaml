@@ -1,9 +1,9 @@
 version: 0.0.4
 type: plugin
 author: rayenbouzaabia
-name: data_function_conversation_memory
+name: data_function_conversation_memory_test
 label:
-  en_US: Conversational Memory Axelites
+  en_US: Conversational Memory Test
   ja_JP: 会話メモリ
   zh_Hans: 会话记忆
   pt_BR: Memória Conversacional

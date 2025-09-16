@@ -11,13 +11,27 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 class GetConversationTool(Tool):
+
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         db_brand = "cloudflare_d1_lite"
+
+        account_id = self.runtime.credentials.get("cloudflare_account_id")
+        database_id = self.runtime.credentials.get("cloudflare_d1_database_id")
+        api_token = self.runtime.credentials.get("cloudflare_api_token")
+
+        if not account_id or not database_id or not api_token:
+            yield self.create_text_message(
+                "Configuration manquante: veuillez renseigner cloudflare_account_id, "
+                "cloudflare_d1_database_id et cloudflare_api_token dans les credentials du provider."
+            )
+            return
+
         db_metadata = {
-            "account_id": tool_parameters["cloudflare_account_id"],
-            "database_id": tool_parameters["cloudflare_d1_database_id"],
-            "api_token": tool_parameters["cloudflare_api_token"],
+            "account_id": account_id,
+            "database_id": database_id,
+            "api_token": api_token,
         }
+
         conversation_id = tool_parameters["conversation_id"]
         max_round = tool_parameters.get("max_round", 50)
         user_input = tool_parameters.get("user_input")

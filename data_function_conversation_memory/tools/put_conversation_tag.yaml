@@ -6,38 +6,34 @@ identity:
   label:
     en_US: Put Conversation Tag
     zh_Hans: 为对话添加标签
+
 description:
   human:
     en_US: Add one or more tags to a conversation (unique add-if-not-exist).
     zh_Hans: 为对话添加一个或多个标签（唯一、若不存在则添加）。
   llm: Add one or more tags to the Conversation.metadata.tags. Tags are unique per conversation.
 parameters:
-  - name: cloudflare_account_id
+  - name: tags
     type: string
     required: true
     label:
-      en_US: Cloudflare Account ID
+      en_US: Tags (comma-separated)
     human_description:
-      en_US: Cloudflare Account ID
-  - name: cloudflare_d1_database_id
-    type: string
-    required: true
-    label:
-      en_US: Cloudflare D1 Database ID
-  - name: cloudflare_api_token
-    type: string
-    required: true
-    label:
-      en_US: Cloudflare API Token
+      en_US: Tags (comma-separated)
+    llm_description:  the tags we use to tag the conversation with(comma-separated)
+    form: llm
   - name: conversation_id
     type: string
     required: true
     label:
       en_US: Conversation ID
-  - name: tags
-    type: string
-    required: false
-    label:
-      en_US: Tags (CSV or array)
+      zh_Hans: 对话 ID
     human_description:
-      en_US: Comma-separated list (e.g. "t1, t2") or pass an array at runtime.
+      en_US: The unique identifier of the conversation to store the message
+      zh_Hans: 要存储消息的对话的唯一标识符
+    llm_description: The unique identifier of the conversation to store the message
+    form: llm
+extra:
+  python:
+    source: tools/put_conversation_tag.py
+
