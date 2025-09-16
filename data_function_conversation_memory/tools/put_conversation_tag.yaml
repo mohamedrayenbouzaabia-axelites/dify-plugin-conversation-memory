@@ -1,0 +1,43 @@
+# yaml
+# put_conversation_tag.yaml
+identity:
+  name: put_conversation_tag
+  author: alterxyz
+  label:
+    en_US: Put Conversation Tag
+    zh_Hans: 为对话添加标签
+description:
+  human:
+    en_US: Add one or more tags to a conversation (unique add-if-not-exist).
+    zh_Hans: 为对话添加一个或多个标签（唯一、若不存在则添加）。
+  llm: Add one or more tags to the Conversation.metadata.tags. Tags are unique per conversation.
+parameters:
+  - name: cloudflare_account_id
+    type: string
+    required: true
+    label:
+      en_US: Cloudflare Account ID
+    human_description:
+      en_US: Cloudflare Account ID
+  - name: cloudflare_d1_database_id
+    type: string
+    required: true
+    label:
+      en_US: Cloudflare D1 Database ID
+  - name: cloudflare_api_token
+    type: string
+    required: true
+    label:
+      en_US: Cloudflare API Token
+  - name: conversation_id
+    type: string
+    required: true
+    label:
+      en_US: Conversation ID
+  - name: tags
+    type: string
+    required: false
+    label:
+      en_US: Tags (CSV or array)
+    human_description:
+      en_US: Comma-separated list (e.g. "t1, t2") or pass an array at runtime.
